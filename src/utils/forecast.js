@@ -7,8 +7,14 @@ const forecast = (longitude, latitude, callback) => {
         if(error) callback('Unable to connect to weather services.');
         else if(data.error) callback('Unable to find location. Try another location.');
         else {
-            const { temperature, feelslike, weather_descriptions: weather } = data.current;
-            callback(undefined, `${weather[0]}. It is currently ${temperature} degrees out. It feels like ${feelslike} degrees out.`);
+            const { temperature, feelslike, weather_descriptions: weather, humidity } = data.current;
+            callback(
+                undefined,
+                `The weather is ${weather[0]}.
+                It is currently ${temperature} degrees out.
+                It feels like ${feelslike} degrees out.
+                The current humidity is ${humidity}%.`
+            );
         }
     })
 }
