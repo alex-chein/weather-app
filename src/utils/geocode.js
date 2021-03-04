@@ -1,7 +1,7 @@
 const request = require('postman-request');
 
-const geocode = (address, callback) => {
-    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=pk.eyJ1IjoibWlndWVsLXJpdmVyYS1jaGVpbiIsImEiOiJja2xyZzRqaWswanAyMnZzMWVwbTdiM3FmIn0.43OSGQqq3qXvgs9MF0kG7w&limit=1`;
+const geocode = (address, key, callback) => {
+    const url = `https://api.mapbox.com/geocoding/v5/mapbox.places/${encodeURIComponent(address)}.json?access_token=${key}&limit=1`;
 
     request({ url, json: true }, (error, response, { features } = {}) => {
         if(error) callback('Unable to connect to location services.');

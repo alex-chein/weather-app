@@ -6,6 +6,11 @@ const geocode = require('./utils/geocode');
 
 const app = express();
 const port = process.env.PORT || 3000;
+if(process.argv[2] === 'dev') {
+    require('dotenv').config();
+}
+const weatherKey = process.env.WEATHER_STACK_ACCESS_KEY;
+const mapboxKey = process.env.MAPBOX_API_KEY;
 
 // Define paths for Express config
 const publicDirectoryPath = path.join(__dirname, '../public');
@@ -46,10 +51,10 @@ app.get('/weather', (req, res) => {
     const { address } = req.query;
     if(!address) return res.send({ error: 'You must provide a search term.' });
 
-    geocode(address, (error, { longitude, latitude, location } = {}) => {
+    geocode(address, mapboxKey, (error, { longitude, latitude, location } = {}) => {
         if(error) return res.send({ error });
     
-        forecast(longitude, latitude, (error, forecastData) => {
+        forecast(longitude, latitude, weatherKey, (error, forecastData) => {
             if(error) return res.send({ error });
     
             res.send({
