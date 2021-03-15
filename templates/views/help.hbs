@@ -11,7 +11,15 @@
 <body>
     <div class="main-content">
         {{>header}}
+        <img class="portrait" src="/img/robot.png" alt="A Robot!">
         <p>{{ message }}</p>
+        <nav class="help-links">
+            <a href="/">I want to get my weather</a>
+            <a href="/about">I want to learn more about this app</a>
+            <a href="https://nodejs.org/en/" target="_blank">I want to know more about NodeJS</a>
+            <a href="https://www.mapbox.com/" target="_blank">I want to know more about Mapbox</a>
+            <a href="https://weatherstack.com/" target="_blank">I want to know more about WeatherStack</a>
+        </nav>
     </div>
     {{>footer }}
 </body>

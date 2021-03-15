@@ -48,10 +48,10 @@ app.get('/help', (req, res) => {
 });
 
 app.get('/weather', (req, res) => {
-    const { address } = req.query;
-    if(!address) return res.send({ error: 'You must provide a search term.' });
+    const { address, latitude, longitude } = req.query;
+    if(!address && !(latitude && longitude)) return res.send({ error: 'You must provide a valid location.' });
 
-    geocode(address, mapboxKey, (error, { longitude, latitude, location } = {}) => {
+    geocode({ address, latitude, longitude }, mapboxKey, (error, { longitude, latitude, location } = {}) => {
         if(error) return res.send({ error });
     
         forecast(longitude, latitude, weatherKey, (error, forecastData) => {
@@ -59,9 +59,8 @@ app.get('/weather', (req, res) => {
     
             res.send({
                 location,
-                forecast: forecastData,
-                address
-            })
+                forecast: forecastData
+            });
         });
     });
 });

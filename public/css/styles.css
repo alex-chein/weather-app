@@ -52,3 +52,12 @@ button {
     color: white;
     padding: 8px;
 }
+
+.help-links {
+    display: inline-block;
+}
+
+.help-links a {
+    display: block;
+    margin-bottom: 12px;
+}
